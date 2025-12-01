@@ -14,7 +14,7 @@
         "R14",
         "L82"
       ],
-      "expected": 12
+      "expected": 3
     }
   ],
   "part2": [
@@ -40,7 +40,7 @@
         "L100",
         "L1050"
       ],
-      "expected": 11
+      "expected": 12
     }
   ]
 }

@@ -5,7 +5,7 @@ import json
 def main():
     with open('custom_cases.json') as f:
         test_cases = json.load(f)
-        print('========== PART 1 ==========')
+        print('\n\n\n\n\n\n\n\n========== PART 1 ==========')
         for test_case in test_cases['part1']:
             result = part1(test_case['lines'])
             if result == test_case['expected']:
@@ -61,24 +61,23 @@ def part2(lines):
     num_zeroes = 0
 
     for line in lines:
-        sign = 1
-        direction = line[0]
-        value = int(line[1:])
-
-        if direction == 'L':
-            sign = -1
-
-        theoretical_value = (dial_value+(sign*value))
-        dial_value = theoretical_value % 100
-
-        num_times_crossing_zero = 0
-        if theoretical_value < 0:
-            num_times_crossing_zero = abs(theoretical_value // 99)
-        else:
-            num_times_crossing_zero = abs(theoretical_value // 100)
-        num_zeroes += num_times_crossing_zero
+        dial_value, nzc = update_dial(dial_value, line[0], int(line[1:]))
+        num_zeroes += nzc
 
     return num_zeroes
+
+
+def update_dial(dial, direction, value):
+    polarity = 1
+    if direction == 'L':
+        polarity = -1
+    divisor = 100
+    dial += value*polarity
+    if dial < 0:
+        divisor = 99
+    nzc = abs(dial // divisor)
+    dial %= divisor
+    return (dial, nzc)
 
 
 if __name__ == '__main__':

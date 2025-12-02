@@ -97,17 +97,18 @@ def update_dial2(curr_dial, direction, value):
     full_dial = curr_dial+(value*polarity)
     num_times_past_z = abs(full_dial // 100)
 
-    if direction == 'L':
-        if curr_dial == 0:
-            num_times_past_z -= 1
+    # Catches the case where moving left from 0 counts as passing 0.
+    if direction == 'L' and curr_dial == 0:
+        num_times_past_z -= 1
 
     curr_dial = full_dial % 100
 
+    # Catches the case where moving left ends up at 0 and fails to count.
     if curr_dial == 0 and direction == 'L':
         num_times_past_z += 1
 
-    print(f'The dial is rotated {direction}{value} to point at {
-          curr_dial}{f'; during this rotation, it points at 0 {f'{num_times_past_z} times' if num_times_past_z > 1 else 'once'}.' if num_times_past_z > 0 else '.'}')
+    # print(f'The dial is rotated {direction}{value} to point at {
+    #       curr_dial}{f'; during this rotation, it points at 0 {f'{num_times_past_z} times' if num_times_past_z > 1 else 'once'}.' if num_times_past_z > 0 else '.'}')
     return (curr_dial, num_times_past_z)
 
 

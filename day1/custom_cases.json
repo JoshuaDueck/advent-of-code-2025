@@ -35,12 +35,31 @@
       "expected": 6
     },
     {
-      "name": "Case 2",
+      "name": "Case 1 extended test",
       "lines": [
+        "L68",
+        "L30",
+        "R48",
+        "L5",
+        "R60",
+        "L55",
+        "L1",
+        "L99",
+        "R14",
+        "L82",
+        "R100",
         "L100",
-        "L1050"
+        "L32",
+        "L100"
       ],
-      "expected": 12
+      "expected": 10
+    },
+    {
+      "name": "Sanity check",
+      "lines": [
+        "R1000"
+      ],
+      "expected": 10
     }
   ]
 }

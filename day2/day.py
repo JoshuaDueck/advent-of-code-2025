@@ -54,7 +54,25 @@ def part1(lines):
 
 
 def part2(lines):
-    return 0
+    result = 0
+    ranges = lines[0].split(',')
+
+    for r in ranges:
+        start, end = r.split('-')
+        start_int = int(start)
+        end_int = int(end)
+
+        for i in range(start_int, end_int+1):
+            str_i = str(i)
+
+            # I don't take full credit for finding this solution.
+            # I was looking for my previous leetcode work on substrings and
+            # ran across this trick that was too clever and simple to forget.
+            # One sentence explaining it and it made complete sense to me.
+            concat = str_i+str_i
+            if concat.index(str_i, 1) < (len(concat) // 2):
+                result += i
+    return result
 
 
 if __name__ == '__main__':

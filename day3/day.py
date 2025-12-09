@@ -57,6 +57,8 @@ NUM = 12
 
 # I CANNOT BELIEVE I DID IT
 # THE ALGO WAS SOUND, I JUST NEEDED TO EXECUTE
+# Wait hold on, I fail all my test cases lol, I have no clue how I passed the actual case...
+# That's going to upset me for a while...
 def part2(lines):
     result = 0
     for bank in lines:

@@ -6,7 +6,7 @@ source .env
 day="$1"
 
 if [ -d ./day$day ]; then
-  # NO-OP
+  echo "Day already exists, pulling input."
 else
   cp -r ./template "./day$day"
 fi

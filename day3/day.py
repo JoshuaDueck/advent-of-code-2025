@@ -63,10 +63,11 @@ def part2(lines):
     result = 0
     for bank in lines:
         bank_stack = []
-        for i, batt in enumerate(bank.strip()):
+        bank = bank.strip()
+        for i, batt in enumerate(bank):
             while len(bank_stack) > 0 \
                 and bank_stack[-1] < int(batt) \
-                    and (len(bank_stack) + len(bank[i:])) > NUM+1:  # I needed to add the +1 to account for the current letter I think. Idk why it worked, but I noticed a bunch of the answers were only 11 letters, and increasing this made them 12.
+                    and (len(bank_stack) + len(bank)-i) > NUM:  # LOL OKAY I LITERALLY WAS NOT CHECKING THE .STRIPPED VERSION HERE AAUGH
                 bank_stack.pop()
             bank_stack.append(int(batt))
 

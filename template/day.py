@@ -32,11 +32,11 @@ def main():
 
 
 def part1(lines):
-    return None
+    return 0
 
 
 def part2(lines):
-    return None
+    return 0
 
 
 if __name__ == '__main__':

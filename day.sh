@@ -5,7 +5,11 @@ source .env
 
 day="$1"
 
-cp -r ./template "./day$day"
+if [ -d ./day$day ]; then
+  # NO-OP
+else
+  cp -r ./template "./day$day"
+fi
 cd "./day$day"
 
 # Requires env var AOC_SESSION to be set

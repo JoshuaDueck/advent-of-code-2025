@@ -31,6 +31,7 @@ def main():
             print("Part 2:", part2(lines))
 
 
+# 833 < X < ???
 def part1(lines):
     result = 0
     ranges = []
@@ -49,18 +50,22 @@ def part1(lines):
     i = 0
     while i < len(ranges)-1:
         if ranges[i][1] >= ranges[i+1][0]:
-            print(f'{ranges[i][1]} >= {ranges[i+1][0]}')
             ranges = delete_and_replace(
                 ranges, i, i+1, [(ranges[i][0], ranges[i+1][1])])
             continue
         i += 1
-    for r in ranges:
-        print(r)
+
+    for ingredient in ingredients:
+        for r in ranges:
+            if ingredient >= r[0] and ingredient <= r[1]:
+                result += 1
+                break
+
     return result
 
 
 def delete_and_replace(lst, index1, index2, replace_value):
-    return lst[:index1] + replace_value + lst[index2:]
+    return lst[:index1] + replace_value + lst[index2+1:]
 
 
 def part2(lines):

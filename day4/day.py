@@ -41,28 +41,54 @@ OFFSETS = [
 def part1(lines):
     result = 0
     for y, row in enumerate(lines):
-        row_cell_counts = []
         for x, cell in enumerate(row.strip()):
-            cell_count = 0
             if cell == '@':
                 surrounding_count = 0
                 for offset in OFFSETS:
-                    try:
-                        offset_val = lines[y+offset[0]][x+offset[1]]
-                        if offset_val == '@':
+                    o_y = y+offset[0]
+                    o_x = x+offset[1]
+                    if (o_y >= 0 and o_y < len(lines)) and (o_x >= 0 and o_x < len(row)):
+                        if lines[o_y][o_x] == '@':
                             surrounding_count += 1
-                    except IndexError:
-                        pass
                 if surrounding_count < 4:
                     result += 1
-                cell_count = surrounding_count
-            row_cell_counts.append(cell_count)
-        print(''.join([str(i) for i in row_cell_counts]))
     return result
 
 
+# Probably my record for the fastest recursive function ever.
+# Whipped it up and it worked first try. And to think that in COMP1020 recursion was the scariest thing to me.
 def part2(lines):
-    return 0
+    result = 0
+    result = get_num_rolls(lines)
+    return result
+
+
+def get_num_rolls(lines):
+    print(lines)
+    result = 0
+    new_lines = []
+    for y, row in enumerate(lines):
+        new_lines.append('')
+        for x, cell in enumerate(row.strip()):
+            if cell == '@':
+                surrounding_count = 0
+                for offset in OFFSETS:
+                    o_y = y+offset[0]
+                    o_x = x+offset[1]
+                    if (o_y >= 0 and o_y < len(lines)) and (o_x >= 0 and o_x < len(row)):
+                        if lines[o_y][o_x] == '@':
+                            surrounding_count += 1
+                if surrounding_count < 4:
+                    result += 1
+                    new_lines[y] += '.'
+                else:
+                    new_lines[y] += '@'
+            else:
+                new_lines[y] += '.'
+    if result == 0:
+        return result
+    else:
+        return result + get_num_rolls(new_lines)
 
 
 if __name__ == '__main__':

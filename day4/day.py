@@ -55,7 +55,7 @@ def part1(lines):
     return result
 
 
-# Probably my record for the fastest recursive function ever.
+# Probably my record for the fastest time coding a recursive function ever.
 # Whipped it up and it worked first try. And to think that in COMP1020 recursion was the scariest thing to me.
 def part2(lines):
     result = 0

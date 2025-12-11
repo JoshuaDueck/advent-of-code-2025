@@ -31,7 +31,6 @@ def main():
             print("Part 2:", part2(lines))
 
 
-# 833 < X < ???
 def part1(lines):
     result = 0
     ranges = []
@@ -46,14 +45,15 @@ def part1(lines):
         else:
             ingredients.append(int(line))
 
-    ranges.sort(key=lambda x: x[0])
-    i = 0
-    while i < len(ranges)-1:
-        if ranges[i][1] >= ranges[i+1][0]:
-            ranges = delete_and_replace(
-                ranges, i, i+1, [(ranges[i][0], ranges[i+1][1])])
-            continue
-        i += 1
+    # something is broken here...
+    # ranges.sort(key=lambda x: x[0])
+    # i = 0
+    # while i < len(ranges)-1:
+    #     if ranges[i][1] >= ranges[i+1][0]:
+    #         ranges = delete_and_replace(
+    #             ranges, i, i+1, [(ranges[i][0], ranges[i+1][1])])
+    #         continue
+    #     i += 1
 
     for ingredient in ingredients:
         for r in ranges:
@@ -64,12 +64,38 @@ def part1(lines):
     return result
 
 
+def part2(lines):
+    result = 0
+    ranges = []
+    for line in lines:
+        line = line.strip()
+        if line == '':
+            break
+        ranges.append((int(line.split('-')[0]), int(line.split('-')[1])))
+
+    ranges.sort(key=lambda x: x[0])
+    i = 0
+    while i < len(ranges)-1:
+        if ranges[i][1] >= ranges[i+1][1]:
+            ranges = delete_and_replace(
+                ranges, i, i+1, [(ranges[i][0], ranges[i][1])])
+            continue
+        if ranges[i][1] >= ranges[i+1][0]:
+            ranges = delete_and_replace(
+                ranges, i, i+1, [(ranges[i][0], ranges[i+1][1])])
+            continue
+        i += 1
+
+    for r in ranges:
+        print(r)
+    for r in ranges:
+        result += r[1] - r[0] + 1  # inclusive, so + 1
+
+    return result
+
+
 def delete_and_replace(lst, index1, index2, replace_value):
     return lst[:index1] + replace_value + lst[index2+1:]
-
-
-def part2(lines):
-    return 0
 
 
 if __name__ == '__main__':
